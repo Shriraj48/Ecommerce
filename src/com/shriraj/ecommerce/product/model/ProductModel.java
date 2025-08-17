@@ -1,7 +1,13 @@
+package com.shriraj.ecommerce.product.model;
+
 public class ProductModel {
 private int productNumber;
 private double productPrice;
 private int productStock;
+
+public ProductModel() {
+	
+}
 
 public ProductModel(int productNumber, double productPrice, int productStock) {
     this.productNumber = productNumber;
@@ -31,5 +37,15 @@ public int getProductStock() {
 
 public void setProductStock(int productStock) {
     this.productStock = productStock;
+}
+
+
+@Override
+public String toString() {
+    return "Product{" +
+            "ProductNumber='" + productNumber + '\'' +
+            ", Stock='" + productStock + '\'' +
+            '}';
+
 }
 }
