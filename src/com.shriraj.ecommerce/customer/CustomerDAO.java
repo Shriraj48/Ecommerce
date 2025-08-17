@@ -5,6 +5,7 @@ public class CustomerDAO {
 private static List<CustomerModel> c = new ArrayList<>();
 	
 	
+
 	public List<CustomerModel> getAllCustomers(){
 		return c;
 	}
