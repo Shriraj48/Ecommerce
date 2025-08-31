@@ -6,32 +6,33 @@ import com.shriraj.ecommerce.customer.DAO.*;
 
 public class CustomerService {
    //private List<Customer> c = new ArrayList<>(); not to do this bcz we have to stored this in storage layer
-	CustomerDAO dao = new CustomerDAO();
-	List<Customer> customerList = dao.getAllCustomers();
+//	ListCustomerDAO customerDAO = new ListCustomerDAO(); // hardcoding solution research
+//	DAOApplication app = RideInjector.createApplication();
+	private CustomerDAO customer;
+	
+	public CustomerService(CustomerDAO customer) {   // constructor dependency injection
+		this.customer = customer;
+	}
 	
 	
 	//Register
-	public void registerCustomer(String customerEmail, String customerPassword) {
-		dao.addCustomer(new Customer(customerEmail, customerPassword, 1000000));
+	public void registerCustomer(String customerEmail, String customerPassword, double customerCredit) {   // add credit 
+		customer.addCustomer(new Customer(customerEmail, customerPassword, customerCredit));  // customer exist logic
 		}
 	
 	
 	//login
 	public Customer loginCustomer(String customerEmail, String customerPassword) {
+		List<Customer> customerList = customer.getAllCustomers();
 		for(Customer c : customerList) {
-
-		if (c.getEmail().equals(customerEmail) && c.getPassword().equals(customerPassword)) {
-			return c;
-			}
+			if (c.getEmail()==(customerEmail) && c.getPassword()==(customerPassword)) {
+				return c;
+				}
 		}
 		return null;   
 	}
 	
 
 } 
-//Enter EmailId:shrirajdhuri30@gmail.com
-//Enter Password:SND302002
-//Enter EmailId:shamikadhuri17@gmail.com
-//Enter Password:SND172010
-//Enter EmailId:shrirajdhuri30@gmail.com
+
 

@@ -5,9 +5,8 @@ import com.shriraj.ecommerce.customer.model.Customer;
 
 
 
-public class CustomerDAO {
-private static List<Customer> customerList = new ArrayList<>();
-	
+public class ListCustomerDAO implements CustomerDAO{
+private static List<Customer> customerList = new ArrayList<>(); // make customerDAO interface and all method in that interface
 	
 	public List<Customer> getAllCustomers(){
 		return customerList;
