@@ -5,8 +5,20 @@ import com.shriraj.ecommerce.customer.model.Customer;
 
 
 
-public class ListCustomerDAO implements CustomerDAO{
-private static List<Customer> customerList = new ArrayList<>(); // make customerDAO interface and all method in that interface
+public class InMemoryCustomerDAO implements CustomerDAO{
+	
+	private List<Customer> customerList;
+	
+//	public InMemoryCustomerDAO(List<Customer> customerList) {
+//		this.customerList = customerList;
+//	}
+	
+	public InMemoryCustomerDAO() {
+		this.customerList = new ArrayList<>();
+	}
+
+	
+//private static List<Customer> customerList = new ArrayList<>(); 
 	
 	public List<Customer> getAllCustomers(){
 		return customerList;
@@ -31,6 +43,10 @@ private static List<Customer> customerList = new ArrayList<>(); // make customer
 	
 	public void addCustomer(Customer customerToBeAdded) {
 		customerList.add(customerToBeAdded);
+	}
+	
+	public void deleteCustomer(Customer customerToBeAdded) {
+		customerList.remove(customerToBeAdded);
 	}
 }
 

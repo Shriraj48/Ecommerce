@@ -1,6 +1,5 @@
 package com.shriraj.ecommerce.customer.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.shriraj.ecommerce.customer.model.Customer;

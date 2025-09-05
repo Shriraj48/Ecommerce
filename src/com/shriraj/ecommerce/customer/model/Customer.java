@@ -1,7 +1,7 @@
 package com.shriraj.ecommerce.customer.model;
 
 public class Customer {
-private static int count = 1; 
+	private static int count = 1; 
 	private int customerId;
 	private String customerPassword;
 	private double customerCredit;
@@ -18,7 +18,7 @@ private static int count = 1;
 	public Customer(String customerEmail, String customerPassword, double customerCredit) {
 	    this.customerEmail = customerEmail;
 	    this.customerPassword = customerPassword;
-	    this.customerId = count++;
+//	    this.customerId = count++;
 	    this.customerCredit = customerCredit; 
 	}
 	

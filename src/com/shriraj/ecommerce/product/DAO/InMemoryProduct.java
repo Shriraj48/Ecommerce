@@ -5,7 +5,7 @@ import java.util.List;
 import com.shriraj.ecommerce.product.model.ProductModel;
 
 
-public class ProductDAO {
+public class InMemoryProduct implements ProductDAO {
 	private static List<ProductModel> productList = new ArrayList<>();
 	
 	public List<ProductModel> getAllAvailableProducts() {
