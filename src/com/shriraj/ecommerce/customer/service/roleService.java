@@ -4,7 +4,7 @@ import com.shriraj.ecommerce.customer.model.Customer;
 
 public interface roleService {
 
-	void registerCustomer(String customerEmail, String customerPassword, double customerCredit);
+	void registerCustomer(String customerEmail, String customerPassword, double customerCredit) throws EmailIdAlreadyUsed;
 
-	Customer loginCustomer(String customerEmail, String customerPassword);
+	Customer loginCustomer(String customerEmail, String customerPassword) throws InvalidCredential;
 }

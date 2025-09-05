@@ -19,22 +19,31 @@ private ProductDAO product;
 		this.product = product;
 	}
 	
+	List<Customer> customerList = customer.getAllCustomers();
 	List<ProductModel> productList = product.getAllAvailableProducts();
-	@Override
-	public void registerCustomer(String customerEmail, String customerPassword, double customerCredit) {    
-		customer.addCustomer(new Customer(customerEmail, customerPassword, customerCredit));  // customer exist logic
-		}
-	
 	
 	@Override
-	public Customer loginCustomer(String customerEmail, String customerPassword) {
+	public void registerCustomer(String customerEmail, String customerPassword, double customerCredit) throws EmailIdAlreadyUsed{    
 		List<Customer> customerList = customer.getAllCustomers();
 		for(Customer c : customerList) {
-			if (c.getEmail()==(customerEmail) && c.getPassword()==(customerPassword)) {
-				return c;
-				}
+			if(c.getEmail().equals(customerEmail)) {
+				throw new EmailIdAlreadyUsed("EmailID Already used"+customerEmail);
+				 }
+			}
+		customer.addCustomer(new Customer(customerEmail, customerPassword, customerCredit));
 		}
-		return null;   
+	
+	
+	
+	@Override
+	public Customer loginCustomer(String customerEmail, String customerPassword) throws InvalidCredential{
+		List<Customer> customerList = customer.getAllCustomers();
+		for(Customer c : customerList) {
+			if(c.getEmail()==(customerEmail) && c.getPassword()==(customerPassword)){
+			return c;
+			}
+		}
+		throw new InvalidCredential("Invalid Password or EmailID");   
 	}
 	
 	@Override
