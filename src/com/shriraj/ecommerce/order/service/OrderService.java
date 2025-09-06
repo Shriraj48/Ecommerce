@@ -1,8 +1,8 @@
 package com.shriraj.ecommerce.order.service;
 import java.util.List;
 
-import com.shriraj.ecommerce.customer.DAO.CustomerDAO;
-import com.shriraj.ecommerce.customer.model.Customer;
+import com.shriraj.ecommerce.customer.DAO.adminDAO.CustomerDAO;
+import com.shriraj.ecommerce.customer.model.buyermodel.Customer;
 import com.shriraj.ecommerce.product.DAO.*;
 import com.shriraj.ecommerce.product.model.*;
 

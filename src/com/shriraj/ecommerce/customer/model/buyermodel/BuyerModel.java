@@ -1,64 +1,56 @@
-package com.shriraj.ecommerce.customer.model;
+package com.shriraj.ecommerce.customer.model.buyermodel;
 
-public class Customer {
+import com.shriraj.ecommerce.customer.model.adminmodel.AdminModel;
+
+public class BuyerModel extends AdminModel{
 	private static int count = 1; 
-	private int customerId;
-	private String customerPassword;
-	private double customerCredit;
-	private String customerEmail;
+	private int buyerId;
+	private double buyerCredit;
 	
 	
-	public Customer() {
-		
+	
+	public BuyerModel(String customerEmail, String customerPassword, double buyerCredit) {
+		this.customerEmail = customerEmail;
+		this.customerPassword = customerEmail;
+		this.buyerCredit = buyerCredit;
 	}
-	
-	
+	   
+	public BuyerModel() {
+	   
 	    
-	    
-	public Customer(String customerEmail, String customerPassword, double customerCredit) {
-	    this.customerEmail = customerEmail;
-	    this.customerPassword = customerPassword;
-//	    this.customerId = count++;
-	    this.customerCredit = customerCredit; 
 	}
 	
-	public void setPassword(String customerPassword){
-	     this.customerPassword = customerPassword;
+	 public static int getCount() {
+		return count;
 	}
-	
-	public void setCredit(double customerCredit){
-	     this.customerCredit = customerCredit;
+
+	public static void setCount(int count) {
+		BuyerModel.count = count;
 	}
-	
-	public void setEmail(String customerEmail){
-	     this.customerEmail = customerEmail;
+
+	public int getBuyerId() {
+		return buyerId;
 	}
-	
-	
-	
-	public String getPassword(){
-	    return customerPassword;
+
+	public void setBuyerId(int buyerId) {
+		this.buyerId = buyerId;
 	}
-	
-	public double getCredit(){
-	     return customerCredit;
+
+	public double getBuyerCredit() {
+		return buyerCredit;
 	}
-	
-	public String getEmail(){
-	     return customerEmail;
+
+	public void setBuyerCredit(double buyerCredit) {
+		this.buyerCredit = buyerCredit;
 	}
-	
-	 public int getCustomerId() {
-	        return customerId;
-	    }
-	 
-	 @Override
-	 public String toString() {
+
+	@Override
+	public String toString() {
 	     return "Customer{" +
+	    		 "Id='" + userId + '\'' +
 	             "email='" + customerEmail + '\'' +
 	             ", password='" + customerPassword + '\'' +
-	             ", credit=' " + customerCredit + '\'' +
+	             ", credit=' " + buyerCredit + '\'' +
 	             '}';
-	 }
 
 }

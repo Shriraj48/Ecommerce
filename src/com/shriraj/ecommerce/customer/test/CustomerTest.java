@@ -1,9 +1,12 @@
 package com.shriraj.ecommerce.customer.test;
 import java.util.*;
 import com.shriraj.ecommerce.customer.DAO.InMemoryCustomerDAO;
+import com.shriraj.ecommerce.customer.DAO.buyerDAO.InMemoryBuyerDAO;
 import com.shriraj.ecommerce.customer.service.EmailIdAlreadyUsed;
 import com.shriraj.ecommerce.customer.service.InvalidCredential;
-import com.shriraj.ecommerce.customer.service.userService;
+import com.shriraj.ecommerce.customer.service.buyerservice.userService;
+import com.shriraj.ecommerce.customer.service.serviceexception.EmailIdAlreadyUsedException;
+import com.shriraj.ecommerce.customer.service.serviceexception.InvalidCredentialException;
 
 public class CustomerTest {
 	
@@ -32,12 +35,12 @@ public class CustomerTest {
 //		String password2 = sc.nextLine();
 		
 //		CustomerDAO h1 = new InMemoryCustomerDAO();
-		userService cs = new userService( new InMemoryCustomerDAO()); // hardcoding  dependency injection
+		userService cs = new userService( new InMemoryBuyerDAO()); // hardcoding  dependency injection
 		try {
 		cs.registerCustomer(email1, password1, 100000);
 		cs.registerCustomer(email2, password2, 100000);
 		cs.registerCustomer(email3, password3, 100000);
-		} catch(EmailIdAlreadyUsed e) {
+		} catch(EmailIdAlreadyUsedException e) {
 			System.out.println(e.getMessage());
 		}
 //		cs.registerCustomer(email2, password2, 100000);
@@ -47,7 +50,7 @@ public class CustomerTest {
 		String password = sc.nextLine();
 		try {
 		System.out.println(cs.loginCustomer(email, password));
-		} catch(InvalidCredential e) {
+		} catch(InvalidCredentialException e) {
 			System.out.println(e.getMessage());
 		}
 //		Customer log = cs.loginCustomer(email3, password3);

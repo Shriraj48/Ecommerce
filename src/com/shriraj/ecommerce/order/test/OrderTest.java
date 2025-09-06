@@ -3,8 +3,8 @@ package com.shriraj.ecommerce.order.test;
 import java.util.List;
 import java.util.Scanner;
 
-import com.shriraj.ecommerce.customer.DAO.CustomerDAO;
-import com.shriraj.ecommerce.customer.model.Customer;
+import com.shriraj.ecommerce.customer.DAO.adminDAO.CustomerDAO;
+import com.shriraj.ecommerce.customer.model.buyermodel.Customer;
 import com.shriraj.ecommerce.customer.service.CustomerService;
 import com.shriraj.ecommerce.customer.test.CustomerTest;
 import com.shriraj.ecommerce.order.service.OrderService;

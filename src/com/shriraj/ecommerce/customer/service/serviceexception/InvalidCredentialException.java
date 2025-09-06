@@ -1,7 +1,7 @@
-package com.shriraj.ecommerce.customer.service;
+package com.shriraj.ecommerce.customer.service.serviceexception;
 
-public class InvalidCredential extends Exception{
-	public InvalidCredential(String message) {
+public class InvalidCredentialException extends Exception{
+	public InvalidCredentialException(String message) {
 		super(message);
 	}
 	

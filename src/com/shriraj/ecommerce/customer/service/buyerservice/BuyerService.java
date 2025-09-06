@@ -1,46 +1,43 @@
-package com.shriraj.ecommerce.customer.service;
+package com.shriraj.ecommerce.customer.service.buyerservice;
 import java.util.List;
-import com.shriraj.ecommerce.customer.model.Customer;
-import com.shriraj.ecommerce.customer.DAO.*;
+import com.shriraj.ecommerce.customer.DAO.buyerDAO.BuyerDAO;
+import com.shriraj.ecommerce.customer.model.buyermodel.BuyerModel;
+import com.shriraj.ecommerce.customer.service.serviceexception.EmailIdAlreadyUsedException;
+import com.shriraj.ecommerce.customer.service.serviceexception.InvalidCredentialException;
 
 
-public class userService implements roleService{
+public class BuyerService  {
 //	private InMemoryCustomerDAO customer; //only valid for inmemorycustomer object 
-	private CustomerDAO customer; // hence making top base class object which valid for all dao operation
+	private BuyerDAO buyer; // hence making top base class object which valid for all dao operation
 	
-	public userService(CustomerDAO customer) {   // constructor dependency injection
-		this.customer = customer;
+	public BuyerService(BuyerDAO buyer) {   // constructor dependency injection
+		this.buyer = buyer;
 	}
 	
-//	List<Customer> customerList = customer.getAllCustomers();
+	List<BuyerModel> buyerList = buyer.getAllBuyers();
 	
-	@Override
-	public void registerCustomer(String customerEmail, String customerPassword, double customerCredit) throws EmailIdAlreadyUsed{    
-		List<Customer> customerList = customer.getAllCustomers();
-		for(Customer c : customerList) {
-			if(c.getEmail().equals(customerEmail)) {
-				throw new EmailIdAlreadyUsed("EmailID Already used"+customerEmail);
+	
+	public void registerCustomer(String customerEmail, String customerPassword, double buyerCredit) throws EmailIdAlreadyUsedException{  
+		for(BuyerModel c : buyerList) {
+			if(c.getCustomerEmail().equals(customerEmail)) {
+				throw new EmailIdAlreadyUsedException("EmailID Already used"+customerEmail);
 				 }
 			}
-		customer.addCustomer(new Customer(customerEmail, customerPassword, customerCredit));
+		buyer.addBuyer(new BuyerModel( customerEmail,  customerPassword,  buyerCredit));
 		}
 	
 	
 	
-	@Override
-	public Customer loginCustomer(String customerEmail, String customerPassword) throws InvalidCredential{
-		List<Customer> customerList = customer.getAllCustomers();
-		for(Customer c : customerList) {
-			if(c.getEmail()==(customerEmail) && c.getPassword()==(customerPassword)){
-			return c;
+	
+	public BuyerModel loginCustomer(String customerEmail, String customerPassword) throws InvalidCredentialException{
+		for(BuyerModel c : buyerList) {
+			if(c.getCustomerEmail().equals(customerEmail) && c.getCustomerPassword().equals(customerPassword)){
+				return c;
 			}
 		}
-		throw new InvalidCredential("Invalid Password or EmailID");   
+		throw new InvalidCredentialException("Invalid Password or EmailID");   
 	}
 	
-	public List<Customer> getAllCustomers(){
-		return customer.getAllCustomers();
-	}
 } 
 
 

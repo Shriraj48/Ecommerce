@@ -1,7 +1,7 @@
-package com.shriraj.ecommerce.customer.service;
+package com.shriraj.ecommerce.customer.service.serviceexception;
 
-public class EmailIdAlreadyUsed extends Exception{
-	public EmailIdAlreadyUsed(String message) {
+public class EmailIdAlreadyUsedException extends Exception{
+	public EmailIdAlreadyUsedException(String message) {
 		super(message);
 	}
 }

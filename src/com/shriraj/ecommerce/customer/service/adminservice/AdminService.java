@@ -1,111 +1,74 @@
-package com.shriraj.ecommerce.customer.service;
+package com.shriraj.ecommerce.customer.service.adminservice;
 
 import java.util.List;
+import com.shriraj.ecommerce.customer.DAO.adminDAO.AdminDAO;
+import com.shriraj.ecommerce.customer.DAO.buyerDAO.BuyerDAO;
+import com.shriraj.ecommerce.customer.DAO.sellerDAO.SellerDAO;
+import com.shriraj.ecommerce.customer.model.adminmodel.AdminModel;
+import com.shriraj.ecommerce.customer.model.buyermodel.BuyerModel;
+import com.shriraj.ecommerce.customer.model.sellermodel.SellerModel;
+import com.shriraj.ecommerce.customer.service.roleService;
+import com.shriraj.ecommerce.customer.service.serviceexception.EmailIdAlreadyUsedException;
+import com.shriraj.ecommerce.customer.service.serviceexception.InvalidCredentialException;
 
-import com.shriraj.ecommerce.customer.DAO.CustomerDAO;
-import com.shriraj.ecommerce.customer.model.Customer;
-import com.shriraj.ecommerce.product.DAO.ProductDAO;
-import com.shriraj.ecommerce.product.model.ProductModel;
 
-public class AdminService implements roleService,ProductDAO{
+public class AdminService {
 	
-	private CustomerDAO customer; 
-	private ProductDAO product;
+	private AdminDAO  user; 
+	private BuyerDAO  user2;
+	private SellerDAO user3;
 	
-	public AdminService(CustomerDAO customer) {   
-		this.customer = customer;
+	public AdminService(AdminDAO user) {   
+		this.user = user;
 	}
 	
-	public AdminService(ProductDAO product) {
-		this.product = product;
+	public AdminService(BuyerDAO  user2) {
+		this.user2 = user2;
 	}
 	
-	List<ProductModel> productList = product.getAllAvailableProducts();
+	public AdminService(SellerDAO  user3) {
+		this.user3 = user3;
+	}
 	
-	List<Customer> customerList = customer.getAllCustomers();
+	List<AdminModel> adminList = user.getAllAdmins();
+	List<BuyerModel> buyerList = user2.getAllBuyers();
+	List<SellerModel> sellerList = user3.getAllSellers();
 	
 
-	@Override
-	public void registerCustomer(String customerEmail, String customerPassword, double customerCredit) throws EmailIdAlreadyUsed{    
-		List<Customer> customerList = customer.getAllCustomers();
-		for(Customer c : customerList) {
-			if(c.getEmail().equals(customerEmail)) {
-				throw new EmailIdAlreadyUsed("EmailID Already used"+customerEmail);
+	
+	public void registerCustomer(String customerEmail, String customerPassword, int userId) throws EmailIdAlreadyUsedException{    
+		for(AdminModel c : adminList) {
+			if(c.getCustomerEmail().equals(customerEmail)) {
+				throw new EmailIdAlreadyUsedException("EmailID Already used"+customerEmail);
 				 }
 			}
-		customer.addCustomer(new Customer(customerEmail, customerPassword, customerCredit));
+		user.addAdmin(new AdminModel(customerEmail, customerPassword, userId));
 		}
 	
 	
-	@Override
-	public Customer loginCustomer(String customerEmail, String customerPassword) throws InvalidCredential{
-		List<Customer> customerList = customer.getAllCustomers();
-		for(Customer c : customerList) {
-			if(c.getEmail()==(customerEmail) && c.getPassword()==(customerPassword)){
+	
+	public AdminModel loginCustomer(String customerEmail, String customerPassword) throws InvalidCredentialException{
+		for(AdminModel c : adminList) {
+			if(c.getCustomerEmail()==(customerEmail) && c.getCustomerPassword()==(customerPassword)){
 			return c;
 			}
 		}
-		throw new InvalidCredential("Invalid Password or EmailID");   
+		throw new InvalidCredentialException("Invalid Password or EmailID");   
 	}
 	
-	public void deleteUser(Customer customerToBeAdded) {
-		customerList.remove(customerToBeAdded);
+	
+	public void deleteBuyer(BuyerModel customerToBeAdded) {
+		buyerList.remove(customerToBeAdded);
 	}
 	
-	@Override
-	public void addProduct(ProductModel productAdded) {
-		productList.add(productAdded);
+	
+	public void deleteSeller(SellerModel customerToBeAdded) {
+		sellerList.remove(customerToBeAdded);
 	}
 	
-	@Override
-	public ProductModel getProductByNumber(int productNumber){
-		for (ProductModel p : productList) {
-			if(p.getProductNumber()==(productNumber)) {
-				return p;
-			}
-		}
-		return null;
-	}
 	
-	@Override
-	public void deleteProduct(int productNumber) {
-	    for (int i = 0; i < productList.size(); i++) {
-	        if (productList.get(i).getProductNumber() == productNumber) {
-	            productList.remove(i); 
-	            break; 
-	        }
-	    }
-	}
-
-			
-	@Override
-	public Integer isProductInStock(int productNumber) {
-		for (ProductModel p : productList) {
-			if(p.getProductNumber()==(productNumber)) {
-				return p.getProductStock();
-			}
-		}
-		return null;
-	}
-	
-	@Override
-	public Integer updateProductInStock(int productNumber, int productStock) {
-		for (ProductModel p : productList) {
-			if(p.getProductNumber()==(productNumber)) {
-				p.setProductStock(productStock);
-				return p.getProductStock();
-			}
-		}
-		return null;
-	}
-	
-	@Override
-	public List<ProductModel> getAllAvailableProducts() {
-		return productList;
-	}
-	
-	public List<Customer> getAllSeller(){
-		return customer.getAllCustomers();
+	public void deleteAdmin(AdminModel customerToBeAdded) {
+		adminList.remove(customerToBeAdded);
 	}
 }
 	
