@@ -1,6 +1,6 @@
-package com.shriraj.ecommerce.customer.model.buyermodel;
+package com.shriraj.ecommerce.customer.model.customer;
 
-import com.shriraj.ecommerce.customer.model.usermodel.User;
+import com.shriraj.ecommerce.customer.model.user.User;
 
 public class Customer extends User{
 	private int order;
@@ -12,7 +12,7 @@ public class Customer extends User{
 		
 	}
 	
-	public Customer(String email, String password,String address, double credit) {
+	public Customer(String email, String password, String address, double credit) {
 		super(email, password);
 		this.address = address;
 		this.credit = credit;
@@ -52,16 +52,13 @@ public class Customer extends User{
 		this.address = address;
 	}
 
-	@Override
 	public String toString() {
 	    return "Customer{" +
 	            "ID='" + getId() + '\'' +
 	            ", email='" + getEmail() + '\'' +
 	            ", password='" + getPassword() + '\'' +
-	            ", address='" + getAddress() + '\'' +
-	            ", credit='" + credit + '\'' +
+	            ", credit='" + getCredit() + '\'' +
 	            '}';
 	}
-
-
 }
+

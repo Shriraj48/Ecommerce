@@ -1,8 +1,8 @@
-package com.shriraj.ecommerce.customer.model.sellermodel;
+package com.shriraj.ecommerce.customer.model.shopkeeper;
 
-import com.shriraj.ecommerce.customer.model.usermodel.User;
+import com.shriraj.ecommerce.customer.model.user.User;
 
-public class ShopKeeper extends User {
+public class Shopkeeper extends User {
 	
 	private int shopId;
 	private String shopName;
@@ -10,10 +10,10 @@ public class ShopKeeper extends User {
 	private String shopOrders;
 	private double shopCredit;
 	
-	public ShopKeeper() {
+	public Shopkeeper() {
 		
 	}
-	public ShopKeeper(String email, String password,String shopName) {
+	public Shopkeeper(String email, String password,String shopName) {
 		super(email, password);
 		this.shopName = shopName;
 	}
@@ -49,9 +49,8 @@ public class ShopKeeper extends User {
 		this.shopCredit = shopCredit;
 	}
 
-	@Override
 	public String toString() {
-	    return "Customer{" +
+	    return "Shopkeeper{" +
 	            "ID='" + getId() + '\'' +
 	            ", email='" + getEmail() + '\'' +
 	            ", password='" + getPassword() + '\'' +
