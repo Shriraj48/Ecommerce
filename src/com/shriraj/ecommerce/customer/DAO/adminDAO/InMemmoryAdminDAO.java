@@ -1,52 +1,64 @@
-package com.shriraj.ecommerce.customer.DAO.adminDAO;
-import java.util.ArrayList;
+package com.shriraj.ecommerce.customer.DAO.admin.adminDAO;
+
 import java.util.List;
-import com.shriraj.ecommerce.customer.model.adminmodel.AdminModel;
+import com.shriraj.ecommerce.customer.DAO.buyerDAO.CustomerDAO;
+import com.shriraj.ecommerce.customer.DAO.sellerDAO.ShopkeeperDAO;
+import com.shriraj.ecommerce.customer.DAOuserDAO.InMemoryUserDAO;
+import com.shriraj.ecommerce.customer.model.adminmodel.Admin;
+import com.shriraj.ecommerce.customer.model.buyermodel.Customer;
+import com.shriraj.ecommerce.customer.model.sellermodel.ShopKeeper;
 
-
-
-public class InMemmoryAdminDAO implements AdminDAO{
+public class InMemmoryAdminDAO extends InMemoryUserDAO implements AdminDAO{
 	
-	private List<AdminModel> adminList;
-	
-//	public InMemoryCustomerDAO(List<Customer> customerList) {
-//		this.customerList = customerList;
-//	}
+
+	private CustomerDAO customer;
+	private ShopkeeperDAO shopkeeper;
+	private List<Admin> adminList;
 	
 	public InMemmoryAdminDAO() {
-		this.adminList = new ArrayList<>();
+		
+	}
+	
+	public InMemmoryAdminDAO(CustomerDAO customer, ShopkeeperDAO shopkeeper, AdminDAO admin,List<Admin> adminList) {
+		super(customer, shopkeeper, admin);
+		this.adminList = adminList;
+	}
+	
+	List<Customer> CustomerList = customer.getAllCustomers(); // Never make this it occupy memmory
+	List<ShopKeeper> shopkeeperList = shopkeeper.getAllShopkeepers();
+	
+	@Override
+	public List<Customer> getAllCustomers(){
+		return customer.getAllCustomers();
+	}
+	
+	@Override
+	public List<ShopKeeper> getAllShopkeeper(){
+		return shopkeeper.getAllShopkeepers();
+	}
+
+	@Override
+	public void addShopkeeper(ShopKeeper customerToBeAdded) {
+	shopkeeperList.add(customerToBeAdded);
+	}
+
+
+	@Override
+	public void deleteUser(int choice,Customer customerToBeAdded,ShopKeeper shopkeeperToBeAdded) {	
+	switch(choice) {
+	case (1) : CustomerList.remove(customerToBeAdded);
+		break;
+	
+	case (2) : shopkeeperList.remove(shopkeeperToBeAdded);
+		break;
+	  }
+}
+
+	@Override
+	public List<Admin> getAdmin() {
+		return adminList;
 	}
 
 	
-//private static List<Customer> customerList = new ArrayList<>(); 
-	
-	public List<AdminModel> getAllAdmins(){
-		return adminList;
-	}
-	
-	public List<String> getAllAdminsEmailId(){ 
-		List<String> emailList = new ArrayList<>();
-		for(AdminModel c : adminList) {
-			emailList.add(c.getCustomerEmail());
-		} 
-		return emailList;
-	}
-	
-	public AdminModel getAdminsByEmailId(String emailId) {
-		for(AdminModel c : adminList) {
-			if(c.getCustomerEmail().equals(emailId)) {
-				return c;
-			}	
-		}
-		return null;
-	}
-	
-	public void addAdmin(AdminModel customerToBeAdded) {
-		adminList.add(customerToBeAdded);
-	}
-	
-	public void deleteAdmin(AdminModel customerToBeAdded) {
-		adminList.remove(customerToBeAdded);
-	}
 }
 

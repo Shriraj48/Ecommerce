@@ -1,17 +1,20 @@
-package com.shriraj.ecommerce.customer.DAO.adminDAO;
+package com.shriraj.ecommerce.customer.DAO.admin.adminDAO;
 
 import java.util.List;
-
-import com.shriraj.ecommerce.customer.model.adminmodel.AdminModel;
+import com.shriraj.ecommerce.customer.model.adminmodel.Admin;
+import com.shriraj.ecommerce.customer.model.buyermodel.Customer;
+import com.shriraj.ecommerce.customer.model.sellermodel.ShopKeeper;
 
 public interface AdminDAO {
-	 List<AdminModel> getAllAdmins();
+	 
+	List<Customer> getAllCustomers();
+	
+	List<ShopKeeper> getAllShopkeeper();
 		
-	 List<String> getAllAdminsEmailId();
+	void addShopkeeper(ShopKeeper customerToBeAdded); 
 		
-	 AdminModel getAdminsByEmailId(String emailId); 
-		
-	 void addAdmin(AdminModel customerToBeAdded); 
-		
-	 void deleteAdmin(AdminModel customerToBeAdded);
+	void deleteUser(int choiceCustomer,Customer customerToBeAdded,ShopKeeper shopkeeperToBeAdded);
+	
+	List<Admin> getAdmin();
+
 }

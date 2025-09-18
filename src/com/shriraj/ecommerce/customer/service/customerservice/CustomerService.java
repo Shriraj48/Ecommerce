@@ -6,15 +6,15 @@ import com.shriraj.ecommerce.customer.service.serviceexception.EmailIdAlreadyUse
 import com.shriraj.ecommerce.customer.service.serviceexception.InvalidCredentialException;
 
 
-public class BuyerService  {
+public class CustomerService  {
 //	private InMemoryCustomerDAO customer; //only valid for inmemorycustomer object 
 	private BuyerDAO buyer; // hence making top base class object which valid for all dao operation
 	
-	public BuyerService(BuyerDAO buyer) {   // constructor dependency injection
-		this.buyer = buyer;
+	public CustomerService(BuyerDAO customer) {   // constructor dependency injection
+		this.customer = customer;
 	}
 	
-	List<BuyerModel> buyerList = buyer.getAllBuyers();
+	List<CustomerModel> buyerList = buyer.getAllBuyers();
 	
 	
 	public void registerCustomer(String customerEmail, String customerPassword, double buyerCredit) throws EmailIdAlreadyUsedException{  
