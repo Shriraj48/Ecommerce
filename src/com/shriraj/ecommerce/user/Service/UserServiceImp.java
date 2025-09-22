@@ -1,9 +1,9 @@
 package com.shriraj.ecommerce.customer.service.user;
 
-import com.shriraj.ecommerce.customer.DAO.userDAO.UserDAO;
+import com.shriraj.ecommerce.user.DAO.UserDAO;
 import com.shriraj.ecommerce.customer.model.customer.Customer;
 import com.shriraj.ecommerce.customer.model.shopkeeper.Shopkeeper;
-import com.shriraj.ecommerce.customer.model.user.User;
+import com.shriraj.ecommerce.user.Model.User;
 
 public class UserService {
 	private UserDAO userdao;

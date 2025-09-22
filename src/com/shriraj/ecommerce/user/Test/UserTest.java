@@ -1,12 +1,10 @@
-package com.shriraj.ecommerce.customer.DAO.userDAO;
+package com.shriraj.ecommerce.user;
 
 
 import java.util.ArrayList;
 
-import com.shriraj.ecommerce.customer.model.customer.Customer;
-import com.shriraj.ecommerce.customer.model.shopkeeper.Shopkeeper;
-import com.shriraj.ecommerce.customer.model.user.User;
 import com.shriraj.ecommerce.customer.service.user.UserService;
+import com.shriraj.ecommerce.user.DAO.InMemoryUserDAO;
 
 public class UserTest {
 
