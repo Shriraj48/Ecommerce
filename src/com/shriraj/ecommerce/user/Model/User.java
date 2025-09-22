@@ -1,11 +1,10 @@
-package com.shriraj.ecommerce.customer.model.user;
+package com.shriraj.ecommerce.user.Model;
 
 public class User {
 	private static int count = 1; 
 	private int id;
 	private String email;
 	private String password;
-//	private Role userRole;
 	
 	public User() {
 		
@@ -40,6 +39,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	
 	@Override
 	public String toString() {

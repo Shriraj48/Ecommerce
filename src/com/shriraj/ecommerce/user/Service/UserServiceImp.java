@@ -1,34 +1,34 @@
-package com.shriraj.ecommerce.customer.service.user;
+package com.shriraj.ecommerce.user.Service;
 
 import com.shriraj.ecommerce.user.DAO.UserDAO;
-import com.shriraj.ecommerce.customer.model.customer.Customer;
-import com.shriraj.ecommerce.customer.model.shopkeeper.Shopkeeper;
+import com.shriraj.ecommerce.user.Exception.UserAlreadyExistException;
+import com.shriraj.ecommerce.user.Exception.UserNotExistException;
 import com.shriraj.ecommerce.user.Model.User;
+import java.util.List;
 
-public class UserService {
+public class UserServiceImp implements UserService {
 	private UserDAO userdao;
-	private User user;
 	
-	public UserService(UserDAO userdao,User users) {
+	public UserServiceImp(UserDAO userdao) {
 		this.userdao = userdao;
-		this.user = users;
 	}
 	
 	
-	
-	public void register(String email, String password,String shopName,String address, double credit) {
-		if (shopName == null) {
-			userdao.addUser(new Customer(email,password,address,credit)); 
-		}else {
-			userdao.addUser(new Shopkeeper(email,password,shopName));
-		}	
-	}
-	
-	public User login(String email, String password) {
+	public void register(String email, String password) throws UserAlreadyExistException{
 		User user = userdao.getUserByEmail(email);
-		if( user != null && user.getPassword().equals(password)){
-			return user;
+		if(user != null) {
+			throw new UserAlreadyExistException("Email Id Already Exist Used Different EmailID");
+		}else {
+		userdao.addUser(new User(email,password)); 
 		}
-		return null;
+	}
+	
+	public User login(String email, String password) throws UserNotExistException{
+		User user = userdao.getUserByEmail(email);
+		if( user != null){
+			return user;
+		}else {
+			throw new UserNotExistException("User not exist");
+		}
 	}
 }

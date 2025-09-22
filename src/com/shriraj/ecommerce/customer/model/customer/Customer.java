@@ -1,6 +1,6 @@
 package com.shriraj.ecommerce.customer.model.customer;
 
-import com.shriraj.ecommerce.customer.model.user.User;
+import com.shriraj.ecommerce.user.Model.User;
 
 public class Customer extends User{
 	private int order;

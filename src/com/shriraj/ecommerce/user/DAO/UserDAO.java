@@ -1,13 +1,16 @@
-package com.shriraj.ecommerce.customer.DAO.userDAO;
+package com.shriraj.ecommerce.user.DAO;
 
-import com.shriraj.ecommerce.customer.model.user.User;
+import java.util.List;
+
+import com.shriraj.ecommerce.user.Model.User;
 
 public interface UserDAO {
 
-	boolean addUser(User user);	
+	 List<User> getAllUsers();
+	 
+	void addUser(User user);	
 	
 	 User getUserByEmail(String email);
 	
-	void logout();
 }
 

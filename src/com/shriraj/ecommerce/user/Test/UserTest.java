@@ -1,23 +1,56 @@
-package com.shriraj.ecommerce.user;
+package com.shriraj.ecommerce.user.Test;
 
 
 import java.util.ArrayList;
 
-import com.shriraj.ecommerce.customer.service.user.UserService;
+import com.shriraj.ecommerce.user.Service.UserService;
+import com.shriraj.ecommerce.user.Service.UserServiceImp;
 import com.shriraj.ecommerce.user.DAO.InMemoryUserDAO;
+import com.shriraj.ecommerce.user.Model.User;
 
 public class UserTest {
 
 	public static void main(String[] args) {
 	
-//	UserDAO dao = new InMemoryUserDAO(new ArrayList<>(),new ArrayList<>());
+//	UserDAO dao = new InMemoryUserDAO(new ArrayList<>());
 	
-	UserService u = new UserService(new InMemoryUserDAO(new ArrayList<>(),new ArrayList<>()),null);
-	u.register("shriraj@", "password", null, "parvati", 1000.0);
+	UserService u = new UserServiceImp(new InMemoryUserDAO(new ArrayList<>()));
+	try{
+		u.register("shriraj@", "password");
+	} catch(Exception e) {
+		System.out.println("Registration failed :" + e.getMessage());
+	}
 	
-	u.register("shamika@", "p", "Enterprise", null, 0.0);
+	try{
+		u.register("shriraj@", "password");
+	} catch(Exception e) {
+		System.out.println("Registration failed :" + e.getMessage());
+	}
 	
-	System.out.println(u.login("shriraj@", "password"));
-	System.out.println(u.login("shamika@", "p"));
+	try{
+		u.register("shamika@", "p");
+	} catch(Exception e) {
+		System.out.println("Registration failed :" + e.getMessage());
+	}
+	
+	try {
+		System.out.println(u.login("shriraj@", "password"));
+	}catch(Exception e) {
+		System.out.println("Logib failed:"+ e.getMessage());
+	}
+	
+	try {
+		System.out.println(u.login("shamika@", "p"));
+	}catch(Exception e) {
+			System.out.println("Logib failed:"+ e.getMessage());
+	}
+	
+	
+	try {
+		System.out.println(u.login("shrira", "password"));
+	}catch(Exception e) {
+			System.out.println("Logib failed:"+ e.getMessage());
+	}
+	
 	}
 }

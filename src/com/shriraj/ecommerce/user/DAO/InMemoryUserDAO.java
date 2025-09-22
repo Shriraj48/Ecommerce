@@ -1,52 +1,36 @@
-package com.shriraj.ecommerce.customer.DAO.userDAO;
+package com.shriraj.ecommerce.user.DAO;
 
-import com.shriraj.ecommerce.customer.model.customer.Customer;
-import com.shriraj.ecommerce.customer.model.shopkeeper.Shopkeeper;
-import com.shriraj.ecommerce.customer.model.user.User;
-import java.util.ArrayList;
+
+import com.shriraj.ecommerce.user.Model.User;
 import java.util.List;
 
 public class InMemoryUserDAO implements UserDAO {
-	private List<Customer> customerList;
-	private List<Shopkeeper> shopkeeperList;
+	private List<User> userList;
+	
 
-	public InMemoryUserDAO(List<Customer> customerList,List<Shopkeeper> shopkeeperList) {
-		this.customerList = customerList;
-		this.shopkeeperList = shopkeeperList;
-
+	public InMemoryUserDAO(List<User> userList) {
+		this.userList = userList;
 	}
 	
 	@Override
-	public boolean addUser(User user) {
-		if(user instanceof Customer) {
-			Customer customerToBeAdded = (Customer)user;
-			customerList.add(customerToBeAdded);
-		}else { 
-			Shopkeeper shopkeeperToBeAdded = (Shopkeeper)user;
-			shopkeeperList.add(shopkeeperToBeAdded);
-		}
-		return false;
-	}
-	
+	  public List<User> getAllUsers() {
+	        return userList;
+	    }
+	  
+	@Override
+	 public void addUser(User user) {
+        userList.add(user);
+    }
 	
 	@Override
 	public User getUserByEmail(String email) {
-		for(Customer c : customerList) {
+		for(User c : userList) {
 			if(c.getEmail().equals(email)) {
 				return c;
-			}
+			} 
 		}
-		for(Shopkeeper s : shopkeeperList) {
-				if(	s.getEmail().equals(email)) {
-					return s;
-				}
-			}  
 		return null;
 	}
 
-	@Override
-	public void logout() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
