@@ -5,16 +5,15 @@ import com.shriraj.ecommerce.Users.user.Model.User;
 public class Customer extends User{
 	private int order;
 	private String cart;
-	private String address;
 	private double credit;
+	private String Address;
 	
 	public Customer() {
 		
 	}
 	
-	public Customer(String email, String password, String address, double credit) {
+	public Customer(String email, String password,double credit) {
 		super(email, password);
-		this.address = address;
 		this.credit = credit;
 	}
 	   
@@ -45,11 +44,11 @@ public class Customer extends User{
 	}
 
 	public String getAddress() {
-		return address;
+		return Address;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		Address = address;
 	}
 
 	public String toString() {
@@ -58,6 +57,7 @@ public class Customer extends User{
 	            ", email='" + getEmail() + '\'' +
 	            ", password='" + getPassword() + '\'' +
 	            ", credit='" + getCredit() + '\'' +
+	            ", address='" + getAddress() + '\'' +
 	            '}';
 	}
 }

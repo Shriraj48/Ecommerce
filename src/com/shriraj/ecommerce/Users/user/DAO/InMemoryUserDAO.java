@@ -1,16 +1,20 @@
 package com.shriraj.ecommerce.Users.user.DAO;
 
 
+import com.shriraj.ecommerce.Users.customer.model.Customer;
 import com.shriraj.ecommerce.Users.user.Model.User;
 import java.util.List;
 
 public class InMemoryUserDAO implements UserDAO {
-	private List<User> userList;
+	protected List<User> userList;
 	
 
+	
+	
 	public InMemoryUserDAO(List<User> userList) {
 		this.userList = userList;
 	}
+
 	
 	@Override
 	  public List<User> getAllUsers() {
@@ -31,6 +35,8 @@ public class InMemoryUserDAO implements UserDAO {
 		}
 		return null;
 	}
-
 	
-}
+	
+	}
+
+
