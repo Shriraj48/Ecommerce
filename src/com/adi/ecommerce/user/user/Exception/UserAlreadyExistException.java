@@ -1,0 +1,7 @@
+package com.adi.ecommerce.user.user.Exception;
+
+public class UserAlreadyExistException extends Exception{
+    public UserAlreadyExistException(String message){
+        super(message);
+    }
+}
