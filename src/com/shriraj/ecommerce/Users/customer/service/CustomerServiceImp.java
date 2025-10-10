@@ -17,16 +17,19 @@ public class CustomerServiceImp extends UserServiceImp  implements CustomerServi
 	
 	@Override
 	public Customer checkProfile(int id) throws InvalidIdException{
-		Customer u = customerdao.findById(id);
-		if (u != null) {
-	        return  u;   
-	    }
+		User u = customerdao.findById(id);
+		if(u instanceof Customer) {
+			Customer c = (Customer) u;
+		if (c != null) {
+	        return  c;   
+	    	}
+		}
 		throw new InvalidIdException("Invalid Id");
 	}
 
 	@Override
 	public void updateCredit(int id, double credit) throws InvalidIdException{
-		Customer u = customerdao.findById(id);
+		Customer u = (Customer) customerdao.findById(id);
 		if(u != null) {
 		 customerdao.update(id,credit);	
 		}else {
@@ -36,7 +39,7 @@ public class CustomerServiceImp extends UserServiceImp  implements CustomerServi
 
 	@Override
 	public void forgotPassword(String email, String password) throws InvalidIdException{
-		Customer u = (Customer) customerdao.getUserByEmail(email);
+		User u = customerdao.getUserByEmail(email);
 		if (u != null) {
 			customerdao.changePasswordByEmailId(email, password);
 		}else {
@@ -45,15 +48,13 @@ public class CustomerServiceImp extends UserServiceImp  implements CustomerServi
 	}
 	
 	@Override
-	public void changeAddress(int id, String address) throws InvalidIdException{
-		Customer u = customerdao.findById(id);
+	public void changeAddress(String email, String address) throws InvalidIdException{
+		User u = customerdao.getUserByEmail(email);
 		if(u != null) {
-			customerdao.addAddress(id, address);
+			customerdao.addAddress(email, address);
 		}else {
 		throw new InvalidIdException("Invalid Id");
 			}
-		}
-	
-
+	}
 }
 

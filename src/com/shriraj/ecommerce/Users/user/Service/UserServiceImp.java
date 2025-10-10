@@ -1,6 +1,7 @@
 package com.shriraj.ecommerce.Users.user.Service;
 
 import com.shriraj.ecommerce.Users.Admin.Model.Admin;
+import com.shriraj.ecommerce.Users.Shopkeeper.Model.Shopkeeper;
 import com.shriraj.ecommerce.Users.customer.model.Customer;
 import com.shriraj.ecommerce.Users.user.DAO.UserDAO;
 import com.shriraj.ecommerce.Users.user.Exception.SelectTheCorrectUser;
@@ -10,6 +11,7 @@ import com.shriraj.ecommerce.Users.user.Model.User;
 
 public class UserServiceImp implements UserService {
 	private UserDAO userdao;
+	
 	
 	public UserServiceImp(UserDAO userdao) {
 		this.userdao = userdao;
@@ -23,16 +25,22 @@ public class UserServiceImp implements UserService {
 	    }
 
 	    User u;
+
 	    if ("customer".equalsIgnoreCase(role)) {
 	        u = new Customer(email, password, 0);
-	    } else if ("admin".equalsIgnoreCase(role)) {
+	        userdao.addUser(u);
+	    } 
+	    else if ("admin".equalsIgnoreCase(role)) {
 	        u = new Admin(email, password);
-	    } else if ("user".equalsIgnoreCase(role)) {
-	        u = new User(email, password);
-	    } else  throw new SelectTheCorrectUser("Invalid role: " + role);
-
-	  
-	    userdao.addUser(u);
+	        userdao.addUser(u);
+	    } 
+	    else if ("shopkeeper".equalsIgnoreCase(role)) {
+	        u = new Shopkeeper(email, password, null);
+	        userdao.addUser(u); 
+	    } 
+	    else {
+	        throw new SelectTheCorrectUser("Invalid role: " + role);
+	    }
 	}
 
 	

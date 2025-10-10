@@ -13,5 +13,5 @@ public interface CustomerService extends UserService {
 
 	void forgotPassword(String email, String password) throws InvalidIdException;	
 	
-	public void changeAddress(int id, String address) throws InvalidIdException;
+	public void changeAddress(String email, String address) throws InvalidIdException;
 }

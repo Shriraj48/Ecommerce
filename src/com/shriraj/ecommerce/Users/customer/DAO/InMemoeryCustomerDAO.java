@@ -13,18 +13,7 @@ public class InMemoeryCustomerDAO extends InMemoryUserDAO implements CustomerDAO
 		super(userList);
 		}
 	
-	@Override
-	public Customer findById(int id) {
-	    for (User u : userList) {           
-	        if (u instanceof Customer) {    
-	            Customer c = (Customer) u; 
-	            if (c.getId() == id) {
-	                return c;             
-	            }
-	        }
-	    }
-	    return null; 
-	}
+
 
 	@Override
 	public void update(int id, double credit) {
@@ -50,11 +39,13 @@ public class InMemoeryCustomerDAO extends InMemoryUserDAO implements CustomerDAO
 		}
 	}
 
-	public void addAddress(int id, String address) {
-		for(User u : userList) {
-			Customer c= (Customer) u;
-			if(c.getId()==(id)) {
-				c.setAddress(address);
+	public void addAddress(String email, String address) {
+		for (User u : userList) {
+			if(u instanceof Customer) {
+				Customer c = (Customer) u;
+				if(c.getEmail().equals(email)) {
+					c.setAddress(address);	
+			   }	
 			}
 		}
 	}
@@ -63,7 +54,7 @@ public class InMemoeryCustomerDAO extends InMemoryUserDAO implements CustomerDAO
 	
 	
 	
-	
+
 	
 	
 	
